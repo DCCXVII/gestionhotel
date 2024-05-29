@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css">
-    <link rel="stylesheet" href="styles.css">
 
     <style>
         body {
@@ -24,7 +23,7 @@
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-            background: #7386D5;
+            background: #123664;
             color: #fff;
             transition: all 0.3s;
         }
@@ -35,7 +34,7 @@
 
         #sidebar .sidebar-header {
             padding: 20px;
-            background: #6d7fcc;
+            background: #123664;
         }
 
         #sidebar ul.components {
@@ -89,6 +88,16 @@
             border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
+        .Logo {
+            color: white;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            font-size: 2.1em;
+            text-transform: uppercase;
+
+        }
     </style>
 </head>
 
@@ -96,20 +105,16 @@
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>UNIHOTEL</h3>
+                <h3 class="Logo"> Schesly</h3>
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="https://codepen.io/JOEDZARR-SADSAD/pen/vYwOaZP">Dashboard</a>
+                    <a href="/pieces">Les pieces</a>
                 </li>
+
+
                 <li>
-                    <a href="https://codepen.io/John-Rake-Serito/pen/WNBQmRe">Rooms</a>
-                </li>
-                <li>
-                    <a href="https://codepen.io/JOEDZARR-SADSAD/pen/VwOKajO">Transactions</a>
-                </li>
-                <li>
-                    <a href="https://codepen.io/JOEDZARR-SADSAD/pen/dyEpMJx">Amenities</a>
+                    <a href="/reservations">Reservations</a>
                 </li>
             </ul>
         </nav>
@@ -126,11 +131,13 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <ul class="nav navbar-nav ml-auto">
+
                             <li class="nav-item">
-                                <a class="nav-link" href="https://codepen.io/JOEDZARR-SADSAD/pen/pomjqEW">Profile</a>
+                                <a class="nav-link" href="/profile">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="https://codepen.io/JOEDZARR-SADSAD/pen/bGyVQjd">Logout</a>
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </li>
                             </li>
                         </ul>
                     </div>
@@ -154,13 +161,7 @@
                             <p>Price: {{ $piece->prix }}/night</p>
                         </div>
 
-                        @if($piece->status == 0)
-                        <button class="btn btn-success view-details" data-toggle="modal" data-target="#{{ $piece->numero_chambre }}Details"><i class="fa-solid fa-file-signature"></i> Reserver </button>
-                        @elseif($piece->status == 1)
-                        <button class="btn btn-danger view-details" data-toggle="modal" data-target="#{{ $piece->numero_chambre }}Details"><i class="fa-solid fa-trash"></i> Evacuer</button>
-                        @else
-                        <button class="btn btn-warning view-details" data-toggle="modal" data-target="#{{ $piece->numero_chambre }}Details"><i class="fa-solid fa-check"></i> Activer</button>
-                        @endif
+
                     </div>
                     @endforeach
                 </div>
@@ -179,6 +180,15 @@
 
 </body>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+<script>
+    $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+    });
+</script>   
 
 
 </html>

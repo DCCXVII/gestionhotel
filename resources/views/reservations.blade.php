@@ -23,7 +23,7 @@
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-            background: #7386D5;
+            background: #123664;
             color: #fff;
             transition: all 0.3s;
         }
@@ -34,7 +34,7 @@
 
         #sidebar .sidebar-header {
             padding: 20px;
-            background: #6d7fcc;
+            background: #123664;
         }
 
         #sidebar ul.components {
@@ -88,6 +88,12 @@
             border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
+        .right-side {
+            display: flex;
+            justify-content: flex-end;
+            margin: 10px;
+        }
     </style>
 </head>
 
@@ -96,24 +102,21 @@
         <!-- Sidebar -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>UNIHOTEL</h3>
+                <h3 class="Logo"> Schesly</h3>
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="https://codepen.io/JOEDZARR-SADSAD/pen/vYwOaZP">Dashboard</a>
-                </li>
-                <li>
-                    <a href="https://codepen.io/John-Rake-Serito/pen/WNBQmRe">Rooms</a>
-                </li>
-                <li>
-                    <a href="https://codepen.io/JOEDZARR-SADSAD/pen/VwOKajO">Transaction</a>
-                </li>
-                <li>
-                    <a href="https://codepen.io/JOEDZARR-SADSAD/pen/dyEpMJx">Amenities</a>
+                    <a href="/pieces">Les pieces</a>
                 </li>
 
+
+                <li>
+                    <a href="/reservations">Reservations</a>
+                </li>
             </ul>
         </nav>
+
+
 
         <!-- Page Content -->
         <div id="content">
@@ -121,41 +124,106 @@
                 <div class="container-fluid">
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
+
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <ul class="nav navbar-nav ml-auto">
-
                             <li class="nav-item">
-                                <a class="nav-link" href="https://codepen.io/JOEDZARR-SADSAD/pen/pomjqEW">Profile</a>
+                                <a class="nav-link" href="/profile">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="https://codepen.io/JOEDZARR-SADSAD/pen/bGyVQjd">Logout</a>
+                                <a class="nav-link" href="/logout">Logout</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
 
+
             <div class="container">
-                <h2>Transaction Management</h2>
+                <h2>Resevation Management</h2>
+                <div class="right-side">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addReservation">
+                        <i class="fa-solid fa-plus"></i> Ajouter Reservation
+                    </button>
+
+                </div>
+
+                <!-- Add Reservation Modal -->
+                <div class="modal fade" id="addReservation" tabindex="-1" role="dialog" aria-labelledby="addReservationLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addReservationLabel">Add Reservation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Reservation Form -->
+                                <form method="POST" action="/create-reservation">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="date_debut">Start Date</label>
+                                        <input type="date" class="form-control" id="date_debut" name="date_debut" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date_fin">End Date</label>
+                                        <input type="date" class="form-control" id="date_fin" name="date_fin" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="numero_chambre">Room Number</label>
+                                        <input type="text" class="form-control" id="numero_chambre" name="numero_chambre" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Nomclient">Client Name</label>
+                                        <input type="text" class="form-control" id="Nomclient" name="Nomclient" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="prix">Price</label>
+                                        <input type="number" class="form-control" id="prix" name="prix" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <select class="form-control" id="status" name="status" required>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Confirmed">Confirmed</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Transaction ID</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Num </th>
+                            <th scope="col">Date debut</th>
+                            <th scope="col">Date fin</th>
+                            <th scope="col">Num chambre</th>
+                            <th scope="col">Nom client</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">status</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($reservations as $reservation)
                         <tr>
                             <th scope="row">{{ $reservation->id }}</th>
-                            <td>{{ $reservation->created_at->format('Y-m-d') }}</td>
+                            <td>{{ $reservation->date_debut }}</td>
+                            <td>{{ $reservation->date_fin }}</td>
+                            <td>{{ $reservation->numero_chambre }}</td>
+                            <td>{{$reservation->Nomclient}}</td>
                             <td>${{ $reservation->prix }}</td>
                             <td><span class="badge badge-success">{{ $reservation->status }}</span></td>
                         </tr>
@@ -196,3 +264,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
     <script>
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    </script>
+
+</body>

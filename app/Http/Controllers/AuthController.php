@@ -25,7 +25,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard')
+            return redirect()->intended('pieces')
                 ->withSuccess('Signed in');
         }
 
@@ -38,15 +38,15 @@ class AuthController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            return view('dashboard', compact('user'));
+            return view('pieces', compact('user'));
         }
 
-        return redirect("login")->withSuccess('You are not allowed to access');
+        return redirect("Login")->withSuccess('You are not allowed to access');
     }
 
     public function signOut()
     {
         Auth::logout();
-        return Redirect('login');
+        return Redirect('Login');
     }
 }
